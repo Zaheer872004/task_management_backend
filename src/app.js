@@ -19,12 +19,13 @@ const app = express();
 app.use(helmet());
 
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://task-management-frontend-olive-beta.vercel.app"
+  ],
+  credentials : true
+}))
 
 // Parsing
 app.use(express.json({ limit: '10kb' }));
