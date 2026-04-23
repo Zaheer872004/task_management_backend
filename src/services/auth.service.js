@@ -5,6 +5,8 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from '../helper/generateTokens.js';
+import jwt from 'jsonwebtoken';
+import { env } from '../config/env.js';
 
 
 export const registerUser = async ({ fullName, email, password }) => {
@@ -72,20 +74,32 @@ export const getAllUsers = async (currentUserId) => {
 };
 
 
-// REFRESH TOKEN API
+
+
 export const refreshAccessToken = async (refreshToken) => {
   if (!refreshToken) throw new ApiError(401, 'Refresh token required');
 
-  const user = await User.findOne({ refreshToken });
-  if (!user) throw new ApiError(403, 'Invalid refresh token');
+  logger.info('Refreshing access token');
+  // VERIFY TOKEN
+  let decoded;
+  try {
+    decoded = jwt.verify(refreshToken, env.JWT_REFRESH_SECRET);
+  } catch {
+    throw new ApiError(403, 'Invalid or expired refresh token');
+  }
+
+  const user = await User.findById(decoded.id);
+  if (!user || user.refreshToken !== refreshToken) {
+    throw new ApiError(403, 'Invalid refresh token');
+  }
 
   const accessToken = generateAccessToken(user);
   const newRefreshToken = generateRefreshToken(user);
 
-  // update refresh token in DB
   user.refreshToken = newRefreshToken;
   await user.save();
 
+  logger.info('Access token refreshed successfully');
 
   return { accessToken, refreshToken: newRefreshToken };
 };

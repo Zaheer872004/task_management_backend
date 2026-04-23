@@ -17,6 +17,8 @@ const app = express();
 
 // Security
 app.use(helmet());
+
+
 app.use(
   cors({
     origin: env.CLIENT_URL,
