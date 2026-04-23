@@ -25,19 +25,32 @@ Backend API for Task Manager, built with Node.js, Express, and MongoDB.
 - MongoDB (local or cloud)
 
 ## Setup
+### 1) Backend URL
+The backend API is hosted at:
+```bash
+https://task-management-backend-1-kwpm.onrender.com
+```
 
-### 1) Clone repository
+### 2) Backend Postman Collection
+You can import the Postman collection for testing the API endpoints:
+```bash
+https://lunar-shadow-336806.postman.co/workspace/Team-Workspace~597bb334-6196-49e3-8936-7e26cc35c81c/collection/38128014-8dc1cabb-a495-4d3b-93f9-0b73470e8169?action=share&source=copy-link&creator=38128014
+```
+
+
+
+### 3) Clone repository
 ```bash
 git clone https://github.com/Zaheer872004/task_management_backend.git
 cd task_management_backend
 ```
 
-### 2) Install dependencies
+### 4) Install dependencies
 ```bash
 npm install
 ```
 
-### 3) Add environment variables
+### 5) Add environment variables
 Create `.env` in backend root:
 
 ```env
