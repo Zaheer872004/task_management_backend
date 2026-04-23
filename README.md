@@ -28,8 +28,8 @@ Backend API for Task Manager, built with Node.js, Express, and MongoDB.
 
 ### 1) Clone repository
 ```bash
-git clone <BACKEND_REPO_URL>
-cd <BACKEND_PROJECT_FOLDER>
+git clone https://github.com/Zaheer872004/task_management_backend.git
+cd task_management_backend
 ```
 
 ### 2) Install dependencies
